@@ -57,9 +57,10 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
             binding.title.setText(oldTitle);
         }
 
-        return new MaterialAlertDialogBuilder(requireContext())
+        return new MaterialAlertDialogBuilder(requireContext()/*, R.style.Theme_Material3_Light_Dialog_Alert*/)
                 .setTitle(R.string.change_note_title)
                 .setView(dialogView)
+                .setBackgroundInsetTop(0)
                 .setCancelable(true)
                 .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onTitleEdited(binding.title.getText().toString()))
                 .setNegativeButton(R.string.simple_cancel, null)
@@ -72,6 +73,7 @@ public class EditTitleDialogFragment extends BrandedDialogFragment {
         binding.title.requestFocus();
         final var window = requireDialog().getWindow();
         if (window != null) {
+            window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, 700);
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         } else {
             Log.w(TAG, "can not enable soft keyboard because " + Window.class.getSimpleName() + " is null.");

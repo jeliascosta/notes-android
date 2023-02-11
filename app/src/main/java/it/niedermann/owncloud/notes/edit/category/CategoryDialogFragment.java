@@ -153,6 +153,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         return new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.change_category_title)
                 .setView(dialogView)
+                .setBackgroundInsetTop(0)
                 .setCancelable(true)
                 .setPositiveButton(R.string.action_edit_save, (dialog, which) -> listener.onCategoryChosen(editCategory.getText().toString()))
                 .setNegativeButton(R.string.simple_cancel, null)
@@ -171,6 +172,7 @@ public class CategoryDialogFragment extends BrandedDialogFragment {
         if (editCategory.getText() == null || editCategory.getText().length() == 0) {
             editCategory.requestFocus();
             if (getDialog() != null && getDialog().getWindow() != null) {
+                getDialog().getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, 700);
                 getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
             } else {
                 Log.w(TAG, "can not set SOFT_INPUT_STATE_ALWAYAS_VISIBLE because getWindow() == null");
